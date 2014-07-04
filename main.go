@@ -2,6 +2,11 @@ package main
 
 import gout "github.com/masnun/gout/library"
 
+const (
+	HOST = "5.135.165.34"
+	PORT = "27001"
+)
+
 func main() {
 
 	// Storage for the Server data

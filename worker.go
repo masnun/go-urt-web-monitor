@@ -19,10 +19,7 @@ func MonitorServer(channel chan gout.Server) {
 }
 
 func RefreshServerDetails() gout.Server {
-	host := "5.135.165.34"
-	port := "27001"
-
-	var response string = gout.GetServerResponse(host, port)
+	var response string = gout.GetServerResponse(HOST, PORT)
 	return gout.ParseResponse(response)
 
 }
