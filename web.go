@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func StartWebServer(data *gout.Server) {
+func StartWebServer(port string, data *gout.Server) {
 	app := gin.Default()
 
 	app.LoadHTMLTemplates("static/html/*")
@@ -26,6 +26,6 @@ func StartWebServer(data *gout.Server) {
 	app.ServeFiles("/static/*filepath", http.Dir("static"))
 
 	// Listen and server on 0.0.0.0:8080
-	fmt.Println("Starting web server")
-	app.Run(":8080")
+	fmt.Println("Starting web server on: " + port)
+	app.Run(":" + port)
 }

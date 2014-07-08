@@ -1,6 +1,9 @@
 package main
 
-import gout "github.com/masnun/gout/library"
+import (
+	"flag"
+	gout "github.com/masnun/gout/library"
+)
 
 const (
 	HOST = "5.135.165.34"
@@ -14,18 +17,22 @@ func main() {
 	// A two way channel for monitoring server data
 	var server_channel chan gout.Server = make(chan gout.Server)
 
+
+	port := flag.String("port", "8765", "Target port on server")
+	flag.Parse()
+	
+
 	// Launch the processes
 	go MonitorServer(server_channel)
-	go StartWebServer(&server_data)
+	go StartWebServer(*port, &server_data)
 
-	// Infinite loop: handle incoming data
+	// Infinite loop: track the channel and update data
 	for {
-		UpdateServerData(&server_data, server_channel)
-		//PrintPlayerList(server_data)
+		TrackChannel(&server_data, server_channel)
 	}
 
 }
 
-func UpdateServerData(data *gout.Server, server_channel chan gout.Server) {
+func TrackChannel(data *gout.Server, server_channel chan gout.Server) {
 	*data = <-server_channel
 }
