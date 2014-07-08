@@ -4,10 +4,11 @@ import (
 	"fmt"
 	gout "github.com/masnun/gout/library"
 	"time"
+	"strconv"
 )
 
 func MonitorServer(host string, port string, delay int, channel chan gout.Server) {
-	fmt.Println("Monitoring: " + host + ":" + port)
+	fmt.Println("Monitoring: " + host + ":" + port + " with " + strconv.Itoa(delay) + " secs refresh interval")
 
 	var repeatTimer time.Duration = time.Duration(delay) * time.Second
 	for _ = range time.Tick(repeatTimer) {

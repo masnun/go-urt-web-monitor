@@ -27,7 +27,13 @@ func main() {
 		server := args[0]
 		server_parts := strings.Split(server, ":")
 		host := server_parts[0]
-		port := server_parts[1]
+		var port string
+		
+		if len(server_parts) > 1 {
+			port = server_parts[1]
+		} else {
+			port = "27960"
+		}
 
 		delay_sec, err := strconv.Atoi(*delay)
 		if err != nil {
