@@ -94,7 +94,13 @@ function UrbanTerrorController($scope, $http) {
             $("a#stop_dn").show();
             $scope.sendDesktopNotification('Urban Terror Server Monitor', 'Desktop Notification has been enabled!');
         } else {
-            Notification.requestPermission();
+            Notification.requestPermission(function(permission) {
+                if (permission === "granted") {
+                    $scope.sendDesktopNotification('Urban Terror Server Monitor', 'Desktop Notification has been enabled!');
+                } else {
+                    alert("You have to allow desktop notification!")
+                }
+            });
         }
     }
 
